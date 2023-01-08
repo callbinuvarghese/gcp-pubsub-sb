@@ -1,0 +1,15 @@
+ https://codelabs.developers.google.com/codelabs/cloud-spring-cloud-gcp-pubsub-integration#0
+
+ curl https://start.spring.io/starter.tgz \
+   -d bootVersion=2.4.7 \
+   -d dependencies=web,integration,cloud-gcp-pubsub \
+   -d baseDir=spring-integration-sender | tar -xzvf -
+
+./gradlew bootRun --args='--server.port=8080'
+
+
+ gcloud pubsub topics create exampleTopic
+
+ gcloud pubsub subscriptions create exampleSubscription --topic exampleTopic
+
+ ➜  ~ curl --data "message=Hello world1" localhost:8080/postMessage
